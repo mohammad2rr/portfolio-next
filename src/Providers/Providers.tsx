@@ -5,7 +5,13 @@ import "primereact/resources/themes/lara-light-indigo/theme.css"; // Choose a th
 import "primereact/resources/primereact.min.css"; // Core CSS
 import "primeicons/primeicons.css"; // Icons
 import { ReactNode } from "react";
+import { Provider } from "react-redux";
+import { store } from "../app/store/store";
 
-export function PrimeProvider({ children }: { children: ReactNode }) {
-  return <PrimeReactProvider>{children}</PrimeReactProvider>;
+export function Providers({ children }: { children: ReactNode }) {
+  return (
+    <Provider store={store}>
+      <PrimeReactProvider>{children}</PrimeReactProvider>
+    </Provider>
+  );
 }

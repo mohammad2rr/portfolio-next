@@ -2,10 +2,23 @@
 
 import React, { useState } from "react";
 import { Dock } from "primereact/dock";
+import { Button } from "primereact/button";
+
 import { RadioButton } from "primereact/radiobutton";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/store/store";
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+} from "./features/counterSlice";
 
 export default function BasicDemo() {
   const [position, setPosition] = useState<any>("bottom");
+
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch();
+
   const items = [
     {
       label: "Finder",
@@ -86,6 +99,19 @@ export default function BasicDemo() {
         }}
       >
         <Dock model={items} position={position} />
+        <div>
+          <Button
+            label="Success"
+            severity="success"
+            onClick={() => dispatch(increment())}
+          />
+          <h1>Counter: {count}</h1>
+          <Button
+            label="Danger"
+            severity="danger"
+            onClick={() => dispatch(decrement())}
+          />
+        </div>
       </div>
     </div>
   );
